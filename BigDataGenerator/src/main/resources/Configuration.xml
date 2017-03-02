@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- 引用到的类，要在这边加以说明，相当于声明在配置文件中，让别的配置文件可以调用 -->
+		<!--  <typeAlias alias="Customer" type="com.hand.entity.Customer"/> -->
+		
+	</typeAliases>
+</configuration>
