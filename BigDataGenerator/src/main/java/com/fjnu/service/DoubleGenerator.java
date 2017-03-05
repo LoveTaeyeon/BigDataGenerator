@@ -1,30 +1,31 @@
 package com.fjnu.service;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class GeneratorInteger {
-	
+public class DoubleGenerator {
+
 	private Integer max;			//最大值最小值	
 	private Integer mix;
 	private Double average;			//正态分布的最均值
 	private Double deviation;		//正态分布的标准差
 	
-	public GeneratorInteger(int max,int mix,Double average,Double deviation){
+	public DoubleGenerator(int max,int mix,Double average,Double deviation){
 		this.max = max;
 		this.mix = mix;
 		this.average = average;
 		this.deviation = deviation;
 	}
-
+	
 	/**
 	 * Box Muller算法，按照算法公式生成随机的正态分布的值
 	 * @return 返回生成的符合正态分布的值
 	 * @throws Exception 
 	 */
-	public Integer generatorInteger() throws Exception{
+	public Double generatorInteger() throws Exception{
 		
 		if(!judgeLegitimacy()){
 			throw new Exception("您输入的最小值大于最大值！");
@@ -37,7 +38,9 @@ public class GeneratorInteger {
 		if(result < this.mix || result > this.max){
 			return generatorInteger();
 		}
-		return (int) result;
+		//使用BigDecimal 四舍五入保留两位小数
+		BigDecimal decimal = new BigDecimal(result);
+		return decimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 	
 	/**
@@ -85,7 +88,7 @@ public class GeneratorInteger {
 	public static void main(String[] args) {
 	
 		try {
-			GeneratorInteger generator = new GeneratorInteger(10000,0,20.0,2.0);
+			DoubleGenerator generator = new DoubleGenerator(10000,0,20.0,2.0);
 			System.out.println(generator.generatorInteger());
 			generator.reSet(21,19,20.0,1.5);
 			System.out.println(generator.generatorInteger());
