@@ -116,6 +116,12 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.2.4.Final</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.mifmif/generex -->
+		<dependency>
+		    <groupId>com.github.mifmif</groupId>
+		    <artifactId>generex</artifactId>
+		    <version>1.0.1</version>
+		</dependency>
   </dependencies>
   <build>
     <finalName>BigDataGenerator</finalName>
