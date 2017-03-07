@@ -55,7 +55,7 @@ public class StringGenerator {
 		//([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,} 邮箱
 		//[\u4e00-\u9fa5],{0,} 汉字
 		//(^\\d{18}$)|(^\\d{15}$) 身份证
-		Generex generator = new Generex("[a-zA-Z]\\w{5,17}");
+		Generex generator = new Generex("(^\\d{18}$)|(^\\d{15}$)");
 		long begin = System.currentTimeMillis();
 		for(int i = 0;i < 1000000;i ++){
 			System.out.println(generator.random());
