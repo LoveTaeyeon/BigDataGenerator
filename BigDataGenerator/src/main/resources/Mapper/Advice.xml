@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fjnu.mapper.AdviceMapper">
+
+	<!-- 
+	<resultMap type="Advice" id="adviceList">
+		<id column="store_id" property="store_id"/>
+		<result column="manager_staff_id" property="manager_staff_id"/>
+		<result column="address_id" property="address_id"/>
+		<result column="last_update" property="last_update"/>
+	</resultMap>
+	 -->
+	
+	<insert id="insert" parameterType="Advice">
+		INSERT INTO advice (advice,date) VALUES (#{advice},#{date})
+	</insert>
+
+</mapper>

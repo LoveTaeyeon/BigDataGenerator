@@ -9,6 +9,8 @@ public class StringGenerator {
 	
 	private String regex;
 
+	public StringGenerator(){}
+	
 	public StringGenerator(String regex) {
 		super();
 		this.regex = regex;

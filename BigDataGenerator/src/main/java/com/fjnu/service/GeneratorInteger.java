@@ -12,6 +12,8 @@ public class GeneratorInteger {
 	private Double average;			//正态分布的最均值
 	private Double deviation;		//正态分布的标准差
 	
+	public GeneratorInteger(){}
+	
 	public GeneratorInteger(int max,int mix,Double average,Double deviation){
 		this.max = max;
 		this.mix = mix;

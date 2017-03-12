@@ -21,6 +21,8 @@ public class GenerlBeanGenerator {
 	private Map<String,Class> fieldsMap = null;
 	private Object object = null;
 	
+	public GenerlBeanGenerator(){}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GenerlBeanGenerator(Map fieldsMap){
 		this.generator = new BeanGenerator();

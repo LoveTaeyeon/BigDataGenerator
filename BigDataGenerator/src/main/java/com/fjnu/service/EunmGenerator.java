@@ -18,6 +18,8 @@ public class EunmGenerator {
 	private String value;
 	private String probability;
 	
+	public EunmGenerator(){}
+	
 	/**
 	 * 
 	 * @param value 用户输入的枚举值[A,B,C]
