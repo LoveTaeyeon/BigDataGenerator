@@ -18,17 +18,27 @@ public class GenerlBeanGenerator {
 	private BeanGenerator generator = null;
 	private BeanMap beanMap = null;
 	@SuppressWarnings("rawtypes")
-	private Map<String,Class> fieldsMap = null;
+	private HashMap<String,Class> fieldsMap = null;
 	private Object object = null;
 	
 	public GenerlBeanGenerator(){}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public GenerlBeanGenerator(Map fieldsMap){
+	@SuppressWarnings("rawtypes")
+	public GenerlBeanGenerator(HashMap<String,Class> fieldsMap){
 		this.generator = new BeanGenerator();
 		this.fieldsMap = fieldsMap;
 	}
 	
+	@SuppressWarnings("rawtypes")
+	public HashMap<String,Class> getFieldsMap() {
+		return fieldsMap;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void setFieldsMap(HashMap<String,Class>  fieldsMap) {
+		this.fieldsMap = fieldsMap;
+	}
+
 	/**
 	 * 为创建的类设置值
 	 * @param key 参数名称
