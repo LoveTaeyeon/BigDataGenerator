@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>BigDataGenerator</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/font-awesome.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/myStyle.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        
+        <div class="site-bg"></div>
+        <div class="site-bg-overlay"></div>
+
+        <!-- 顶部导航栏 -->
+        <div class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p style="font-size: 18px">
+                            <strong>BigDataGenerator</strong>
+                        </p>
+                    </div>
+                    <!-- github地址 -->
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="social-icons">
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/LoveTaeyeon/BigDataGenerator" target="view_window" class="fa fa-github"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <!-- 顶部导航栏结束 -->
+
+        <div class="visible-xs visible-sm responsive-menu">
+            <!-- 页面缩小时，显示收缩条 -->
+            <a href="#" class="toggle-menu">
+                <i class="fa fa-bars"></i>菜单
+            </a>
+            <!-- 右侧导航栏 -->
+            <div class="show-menu">
+                <ul class="main-menu">
+                    <li>
+                        <a class="show-1 active homebutton" href="#">
+                            <i class="fa fa-home"></i>主页
+                        </a>
+                    </li>
+                    <li>
+                        <a class="show-2 aboutbutton" href="#">
+                            <i class="fa fa-sort-alpha-asc"></i>数据生成
+                        </a>
+                    </li>
+                    <li>
+                        <a class="show-3 projectbutton" href="#"><i class="fa fa-camera"></i>Gallery</a>
+                    </li>
+                    <li>
+                        <a class="show-5 contactbutton" href="#"><i class="fa fa-envelope"></i>Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- container容器 -->
+        <div class="container" id="page-content">
+            <div class="row">
+                <div class="col-md-9 col-sm-12 content-holder">
+                    <!-- CONTENT -->
+                    <div id="menu-container">
+                        <!-- logo 
+                        <div class="logo-holder logo-top-margin">
+                            <a href="#" class="site-brand">
+                                <img style="height:100px" src="images/123.png" alt="">
+                            </a>
+                        </div>
+                        -->
+                        <div id="menu-1" class="homepage home-section text-center">
+                            <div class="welcome-text">
+                                <h2>Hello, Welcome to <strong>BigDataGenerator</strong> !</h2>
+                                <p style="text-indent:36px;text-align:left">大数据生成器，可以生成用户所需的符合规则的数据。这些数据既可以帮助不同的人员进行大数据的学习和研发，也可以帮助一些企业随机的生成一些测试用例。对大数据的推动与发展，都将拥有不可或缺的意义。本项目完全开源，可以访问以下地址或者点击右上角的Git图标获取源码：<br><br>
+                                    <p>
+                                        <a class="green" target="view_window" href="https://github.com/LoveTaeyeon/BigDataGenerator">
+                                            github.com/LoveTaeyeon/BigDataGenerator
+                                        </a>
+                                    </p>
+                                </p>
+                                <!-- 邀请码表单 -->
+                                <form action="#" method="get" class="subscribe-form">
+                                    <div class="row">
+                                        <fieldset class="col-md-offset-2 col-md-6">
+                                            <textarea style="height: 150px;" name="subscribe-email" id="subscribe-advice" placeholder="Write your advice here.."></textarea>
+                                        </fieldset>
+                                        <fieldset class="col-md-4 button-holder">
+                                            <input style="margin-top: 55px;margin-left: 20px" name="submit" type="submit" class="button default" id="submit" value="Submit">
+                                        </fieldset>
+                                    </div>
+                                    <p class="subscribe-text">
+                                        留下您宝贵的意见，谢谢！
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- 数据生成 -->
+                        <div id="menu-2" class="content about-section">
+                            <!-- 枚举类型生成 -->
+                            <div class="row">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="tableName">表名</label>
+                                        <input type="text" class="top-input" id="tableName" placeholder="table_name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dataNumber">条数</label>
+                                        <input type="text" class="top-input" id="dataNumber" placeholder="1000000">
+                                    </div>
+                                </form>
+                            </div><br><br>
+                            <h2 class="prompt">枚举类型生成表：</h2>
+                            <button class="btn-sm btn-info" id="addEnum">增加行</button>
+                            <button class="btn-sm btn-danger" id="delEnum">删除行</button>
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <table id="enumTable">
+                                        <tr>
+                                            <th class="col-md-3">属性名</th>
+                                            <th class="col-md-5">枚举值</th>
+                                            <th class="col-md-4">枚举概率</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-3">
+                                    FAQ:<br>
+                                    (1)属性名的输入应该为英文，如性别：sex<br>
+                                    (2)枚举值的输入应该为您想要的枚举值，如：A,B,C,D（注意逗号为英文的逗号！）<br>
+                                    (3)枚举概率的输入应该与前面的枚举值一一对应且加起来应为1，如0.2,0.3,0.4,0.03,0.07标示的意思为，A生成的概率为0.2，B为0.3，以此类推，不限制个数
+                                </div>
+                            </div>
+                            <!-- 枚举类型生成结束 -->
+                            <!-- Integer类型生成 -->
+                            <h2 class="prompt">整数类型生成表：</h2>
+                            <button class="btn-sm btn-info" id="addInteger">增加行</button>
+                            <button class="btn-sm btn-danger" id="delInteger">删除行</button>
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <table id="integerTable">
+                                        <tr>
+                                            <th class="col-md-2">属性名</th>
+                                            <th class="col-md-2">最大值</th>
+                                            <th class="col-md-2">最小值</th>
+                                            <th class="col-md-3">正态分布均值</th>
+                                            <th class="col-md-3">正态分布标准差</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-3">
+                                    FAQ:<br>
+                                    (1)属性名的输入应该为英文，如年龄：age<br>
+                                    (2)最大值的输入应该为您想要的最大边界值，注意为整形，如：100<br>
+                                    (3)最小值的输入应该为您想要的最小边界值，注意为整形，如：10<br>
+                                    (4)正态分布均值μ（也称期望值），均值决定着正态分布的位置，概率规律为取与μ邻近的值的概率大，而取离μ越远的值的概率越小，如：11.5<br>
+                                    (5)正态分布的标准差σ，标准差决定了正态分布的幅度，σ越大，数据分布越分散，σ越小，数据分布越集中，如：1.2
+                                </div>
+                            </div>
+                            <!-- Integer类型生成结束 -->
+                            <!-- Double类型生成 -->
+                            <h2 class="prompt">浮点类型生成表：</h2>
+                            <button class="btn-sm btn-info" id="addDouble">增加行</button>
+                            <button class="btn-sm btn-danger" id="delDouble">删除行</button>
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <table id="doubleTable">
+                                        <tr>
+                                            <th class="col-md-2">属性名</th>
+                                            <th class="col-md-2">最大值</th>
+                                            <th class="col-md-2">最小值</th>
+                                            <th class="col-md-3">正态分布均值</th>
+                                            <th class="col-md-3">正态分布标准差</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-3">
+                                    FAQ:<br>
+                                    (1)属性名的输入应该为英文，如价格：price<br>
+                                    (2)最大值的输入应该为您想要的最大边界值，如：20.5<br>
+                                    (3)最小值的输入应该为您想要的最小边界值，如：5.5<br>
+                                    (4)正态分布均值μ（也称期望值），均值决定着正态分布的位置，概率规律为取与μ邻近的值的概率大，而取离μ越远的值的概率越小，如：11.2<br>
+                                    (5)正态分布的标准差σ，标准差决定了正态分布的幅度，σ越大，数据分布越分散，σ越小，数据分布越集中，如：1.2
+                                </div>
+                            </div>
+                            <!-- Double类型生成结束 -->
+                            <!-- String类型生成 -->
+                            <h2 class="prompt">字符串类型生成表：</h2>
+                            <button class="btn-sm btn-info" id="addString">增加行</button>
+                            <button class="btn-sm btn-danger" id="delString">删除行</button>
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <table id="stringTable">
+                                        <tr>
+                                            <th class="col-md-4">属性名</th>
+                                            <th class="col-md-8">正则表达式</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-3">
+                                    FAQ:<br>
+                                    (1)属性名的输入应该为英文，如电话号码：phoneNumber<br>
+                                    (2)正则表达式的输入应该为标准的正则表达式，例子：<br>
+                                    电话号码：[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}<br>
+                                    用户名：[a-zA-Z]\\w{5,17}<br>
+                                    密码：[a-zA-Z0-9]{6,16}<br>
+                                    汉字：[\u4e00-\u9fa5],{0,}
+                                </div>
+                            </div>
+                            <!-- String类型生成结束 -->
+                            <!-- 提交按钮 -->
+                            <br><br>
+                            <div style="text-align: center">
+                                <button style="text-align: center" class="btn-lg btn-success" id="generatorData">生成数据</button>
+                            </div>
+                            
+                        </div>
+                        <!-- 数据呈现 -->
+                        <div id="menu-3" class="content gallery-section">
+                            <div class="box-content">
+                                <h3 class="widget-title">Past Projects</h3>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="project-item">
+                                            <img src="images/1.jpg" alt="">
+                                            <div class="project-hover">
+                                                <h4>Great Nature Capture</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="project-item">
+                                            <img src="images/2.jpg" alt="">
+                                            <div class="project-hover">
+                                                <h4>Another Image Caption</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="project-item">
+                                            <img src="images/3.jpg" alt="">
+                                            <div class="project-hover">
+                                                <h4>Great Nature Capture</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="project-item">
+                                            <img src="images/4.jpg" alt="">
+                                            <div class="project-hover">
+                                                <h4>Another Image Caption</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="project-item">
+                                            <img src="images/5.jpg" alt="">
+                                            <div class="project-hover">
+                                                <h4>Great Nature Capture</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="project-item">
+                                            <img src="images/6.jpg" alt="">
+                                            <div class="project-hover">
+                                                <h4>Another Image Caption</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-pages">
+                                    <ul>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">...</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="menu-4" class="content contact-section">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="box-content">
+                                        <h3 class="widget-title">Send Us A Message</h3>
+                                        <form class="contact-form">
+                                            <fieldset>
+                                                <input type="text" class="name" id="name" placeholder="Name...">
+                                            </fieldset> 
+                                            <fieldset>
+                                                <input type="email" class="email" id="email" placeholder="Email...">
+                                            </fieldset> 
+                                            <fieldset>
+                                                <input type="text" class="subject" id="subject" placeholder="Subject...">
+                                            </fieldset>
+                                            <fieldset>
+                                                <textarea name="message" id="message" cols="30" rows="4" placeholder="Message.."></textarea>
+                                            </fieldset>
+                                            <fieldset>
+                                                <input type="submit" class="button" id="button" value="Send Message">
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="box-content">
+                                        <h3 class="widget-title">Stay In Touch</h3>
+                                        <p>Sed ullamcorper, risus a tincidunt efficitur, massa mauris ultricies leo, eu interdum eros erat non augue. <br><br>
+										Suspendisse ornare sollicitudin lectus non egestas. Nam fermentum imperdiet ligula congue venenatis. </p>
+                                        <div class="about-social">
+                                            <ul>
+                                                <li><a href="#" class="fa fa-facebook"></a></li>
+                                                <li><a href="#" class="fa fa-twitter"></a></li>
+                                                <li><a href="#" class="fa fa-linkedin"></a></li>
+                                                <li><a href="#" class="fa fa-dribbble"></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 右侧导航栏 -->
+                <div class="col-md-3 hidden-sm">
+                    <nav id="nav" class="main-navigation hidden-xs hidden-sm">
+                        <ul class="main-menu">
+                            <li>
+                                <a class="show-1 active homebutton" href="#">
+                                    <i class="fa fa-home"></i>主页
+                                </a>
+                            </li>
+                            <li>
+                                <a class="show-2 aboutbutton" href="#">
+                                    <i class="fa fa-sort-alpha-asc"></i>数据生成
+                                </a>
+                            </li>
+                            <li>
+                                <a class="show-3 projectbutton" href="#">
+                                    <i class="fa fa-bar-chart"></i>数据呈现
+                                </a>
+                            </li>
+                            <li>
+                                <a class="show-5 contactbutton" href="#"><i class="fa fa-envelope"></i>Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- 右侧导航栏结束 -->
+                <a href="#" id="toTop" style="display: block;">
+                    <span id="toTopHover" style="opacity: 1;"></span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 页面底部的说明 -->
+        <div class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>BigDataGenerator Create By HanShuo 1185221615@qq.com</p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <!-- 底部说明结束 -->
+
+        <script src="js/vendor/jquery-1.10.2.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <!-- 返回顶部按钮 -->
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
+        <script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    $(".scroll").click(function(event){     
+                        event.preventDefault();
+                        $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+                    });
+                });
+        </script>
+        <!-- 返回顶部按钮结束 -->
+		
+    </body>
+
+    <script type="text/javascript">
+
+        var enumNum = 0;
+        var integerNum = 0;
+        var doubleNum = 0;
+        var stringNum = 0;
+        
+        //Enum增加和删除按钮的监听
+        $("#addEnum").click(function(){
+            $tr = $("<tr id='enum" + enumNum + "'>")
+            $fieldName = $("<td><input class='td-input' type='text' id='enumFieldName" + enumNum + "'></td>");
+            $enumValue = $("<td><input class='td-input' type='text' id='enumValue" + enumNum + "'></td>");
+            $enumProbability = $("<td><input class='td-input' type='text' id='enumProbability" + enumNum + "'></td>");
+            $end_tr = $("</tr>")
+            $tr.append($fieldName);
+            $tr.append($enumValue);
+            $tr.append($enumProbability);
+            $tr.append($end_tr);
+            $("#enumTable").append($tr);
+            enumNum ++;
+        });
+
+        $("#delEnum").click(function(){
+            var temp = enumNum - 1;
+            var tr = $("#enum" + temp);
+            tr.remove();
+            enumNum --;
+        });
+        //Enum增加和删除按钮的监听结束
+        //Integer增加和删除按钮的监听
+        $("#addInteger").click(function(){
+            $tr = $("<tr id='integer" + integerNum + "'>")
+            $fieldName = $("<td><input class='td-input' type='text' id='integerFieldName" + integerNum + "'></td>");
+            $max = $("<td><input class='td-input' type='text' id='maxInteger" + integerNum + "'></td>");
+            $mix = $("<td><input class='td-input' type='text' id='mixInteger" + integerNum + "'></td>");
+            $average = $("<td><input class='td-input' type='text' id='averageInteger" + integerNum + "'></td>");
+            $deviation = $("<td><input class='td-input' type='text' id='deviationInteger" + integerNum + "'></td>");
+            $end_tr = $("</tr>")
+            $tr.append($fieldName);
+            $tr.append($max);
+            $tr.append($mix);
+            $tr.append($average);
+            $tr.append($deviation);
+            $tr.append($end_tr);
+            $("#integerTable").append($tr);
+            integerNum ++;
+        });
+
+        $("#delInteger").click(function(){
+            var temp = integerNum - 1;
+            var tr = $("#integer" + temp);
+            tr.remove();
+            integerNum --;
+        });
+        //Integer增加和删除按钮的监听结束
+        //Double增加和删除按钮的监听
+        $("#addDouble").click(function(){
+            $tr = $("<tr id='double" + doubleNum + "'>")
+            $fieldName = $("<td><input class='td-input' type='text' id='doubleFieldName" + doubleNum + "'></td>");
+            $max = $("<td><input class='td-input' type='text' id='maxDouble" + doubleNum + "'></td>");
+            $mix = $("<td><input class='td-input' type='text' id='mixDouble" + doubleNum + "'></td>");
+            $average = $("<td><input class='td-input' type='text' id='averageDouble" + doubleNum + "'></td>");
+            $deviation = $("<td><input class='td-input' type='text' id='deviationDouble" + doubleNum + "'></td>");
+            $end_tr = $("</tr>")
+            $tr.append($fieldName);
+            $tr.append($max);
+            $tr.append($mix);
+            $tr.append($average);
+            $tr.append($deviation);
+            $tr.append($end_tr);
+            $("#doubleTable").append($tr);
+            doubleNum ++;
+        });
+
+        $("#delDouble").click(function(){
+            var temp = doubleNum - 1;
+            var tr = $("#double" + temp);
+            tr.remove();
+            doubleNum --;
+        });
+        //Double增加和删除按钮的监听结束
+        //String增加和删除按钮的监听
+        $("#addString").click(function(){
+            $tr = $("<tr id='string" + stringNum + "'>")
+            $fieldName = $("<td><input class='td-input' type='text' id='stringFieldName" + stringNum + "'></td>");
+            $regex = $("<td><input class='td-input' type='text' id='regex" + stringNum + "'></td>");
+            $end_tr = $("</tr>")
+            $tr.append($fieldName);
+            $tr.append($regex);
+            $tr.append($end_tr);
+            $("#stringTable").append($tr);
+            stringNum ++;
+        });
+
+        $("#delString").click(function(){
+            var temp = stringNum - 1;
+            var tr = $("#string" + temp);
+            tr.remove();
+            stringNum --;
+        });
+        //String增加和删除按钮的监听结束
+
+        //生成数据按钮监听
+        $("#generatorData").click(function(){
+            var enumList = [];
+            var integerList = [];
+            var doubleList = [];
+            var stringList = [];
+            //对对象数组进行构造，获取表格信息
+            for(var i = 0;i < enumNum;i ++){
+                var obj = new Object();
+                obj["enumFieldName"] = $("#enumFieldName" + i).val();
+                obj["enumValue"] = $("#enumValue" + i).val();
+                obj["enumProbability"] = $("#enumProbability" + i).val();
+                enumList[i] = obj;
+            }
+            for(var i = 0;i < integerNum;i ++){
+                var obj = new Object();
+                obj["integerFieldName"] = $("#integerFieldName" + i).val();
+                obj["maxInteger"] = $("#maxInteger" + i).val();
+                obj["mixInteger"] = $("#mixInteger" + i).val();
+                obj["averageInteger"] = $("#averageInteger" + i).val();
+                obj["deviationInteger"] = $("#deviationInteger" + i).val();
+                integerList[i] = obj;
+            }
+            for(var i = 0;i < doubleNum;i ++){
+                var obj = new Object();
+                obj["doubleFieldName"] = $("#doubleFieldName" + i).val();
+                obj["maxDouble"] = $("#maxDouble" + i).val();
+                obj["mixDouble"] = $("#mixDouble" + i).val();
+                obj["averageDouble"] = $("#averageDouble" + i).val();
+                obj["deviationDouble"] = $("#deviationDouble" + i).val();
+                doubleList[i] = obj;
+            }
+            for(var i = 0;i < stringNum;i ++){
+                var obj = new Object();
+                obj["stringFieldName"] = $("#stringFieldName" + i).val();
+                obj["regex"] = $("#regex" + i).val();
+                stringList[i] = obj;
+            }
+            var tableName = $("#tableName").val();
+            var dataNumber = $("#dataNumber").val();
+            console.log(JSON.stringify(enumList));
+            console.log(JSON.stringify(integerList));
+            console.log(JSON.stringify(doubleList));
+            console.log(JSON.stringify(stringList));
+            //向后台传值
+            $.ajax({
+                url        : '${base.contextPath}/job/create',
+                type       : "POST",
+                dataType   : "json",
+                contentType: "application/json",
+                data       : {
+                    tableName    : tableName,
+                    dataNumber   : dataNumber,
+                    enumList     : JSON.stringify(enumList),
+                    integerList  : JSON.stringify(integerList),
+                    doubleList   : JSON.stringify(doubleList),
+                    stringList   : JSON.stringify(stringList)
+                },
+                success    : function (json) {
+                    
+                },
+                error      : function () {
+                    
+                }
+            });
+        });
+
+    </script>
+
+</html>

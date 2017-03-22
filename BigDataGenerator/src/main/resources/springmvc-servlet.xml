@@ -20,7 +20,7 @@
 	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".html" />
 	</bean>
 
@@ -91,6 +91,7 @@
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:resources location="/css/" mapping="/css/**"/>
 	<mvc:resources location="/image/" mapping="/image/**"/>
+	<mvc:resources location="/" mapping="/**"/>
 	
 	<!-- 拦截器
 	<mvc:interceptors>
