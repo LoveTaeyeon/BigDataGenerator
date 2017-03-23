@@ -552,26 +552,16 @@
             console.log(JSON.stringify(doubleList));
             console.log(JSON.stringify(stringList));
             //向后台传值
-            $.ajax({
-                url        : '${base.contextPath}/job/create',
-                type       : "POST",
-                dataType   : "json",
-                contentType: "application/json",
-                data       : {
-                    tableName    : tableName,
-                    dataNumber   : dataNumber,
-                    enumList     : JSON.stringify(enumList),
-                    integerList  : JSON.stringify(integerList),
-                    doubleList   : JSON.stringify(doubleList),
-                    stringList   : JSON.stringify(stringList)
-                },
-                success    : function (json) {
-                    
-                },
-                error      : function () {
-                    
-                }
+            $.post("generlBean/create",{"tableName":tableName,
+                                  "dataNumber":dataNumber,
+                                  "enumList":JSON.stringify(enumList),
+                                  "integerList":JSON.stringify(integerList),
+                                  "doubleList":JSON.stringify(doubleList),
+                                  "stringList":JSON.stringify(stringList),
+                              },function(data){
+                
             });
+            
         });
 
     </script>
