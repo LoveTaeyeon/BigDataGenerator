@@ -1,27 +1,32 @@
 package com.fjnu.utils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 @Service
+@SuppressWarnings("rawtypes")
 public class SqlBulider {
+	
+	private List<String> fieldsNameList = new ArrayList<String>();			//存储表结构各个属性的排序
 
 	/**
 	 * 
 	 * @param fieldsMap 属性以及属性类型Map
 	 * @return 拼接好的生成表的String
 	 */
-	@SuppressWarnings("rawtypes")
 	public String bulidCreateTableSql(HashMap<String,Class> fieldsMap){
 		
 		StringBuilder sql = new StringBuilder();
 		Set keySet = fieldsMap.keySet();
 		for(Iterator i = keySet.iterator();i.hasNext();){
 			String key = (String)i.next();
+			fieldsNameList.add(key);
 			sql.append(key + " " + getMySqlDataType(fieldsMap.get(key)) + " NOT NULL,\n");
 		}
 		return sql.toString();
@@ -32,7 +37,6 @@ public class SqlBulider {
 	 * @param className 属性的类型封装类
 	 * @return 对应MySql中的数据类型
 	 */
-	@SuppressWarnings("rawtypes")
 	public String getMySqlDataType(Class className){
 		
 		switch(className.getSimpleName()){
@@ -45,8 +49,38 @@ public class SqlBulider {
 		return "";
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public String buildInsertSql(int dataNumber,List<Class> fieldsList){
+		StringBuilder sql = new StringBuilder();
+		for(int i = 0;i < dataNumber;i ++){
+			sql.append("(");
+			for(Class className : fieldsList){
+				switch(className.getSimpleName()){
+					case "String" :
+						
+						break;
+					case "Integer" :
+						break;
+					case "Boolean" :
+						break;
+					case "Double" :
+						break;
+					case "Date" :
+						break;
+				}
+			}
+			sql.append(")");
+			if(i != dataNumber){
+				sql.append(",");
+			}
+		}
+		return sql.toString();
+	}
+	
 	public static void main(String[] args) {
-		@SuppressWarnings("rawtypes")
 		HashMap<String,Class> fieldsMap = new HashMap<String,Class>();
 		fieldsMap.put("name",String.class);
 		fieldsMap.put("age",Integer.class);

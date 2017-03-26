@@ -45,7 +45,7 @@ public class GenerlBeanGenerator {
 	 * @param value 参数值
 	 */
 	public void setValue(String key,Object value){
-		beanMap.put(key, value);
+		beanMap.put(key,value);
 	}
 	
 	/**

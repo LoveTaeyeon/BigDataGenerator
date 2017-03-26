@@ -15,5 +15,9 @@
 		   PRIMARY KEY (`id`)
 		) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 	</insert>
+	
+	<insert id="insert" parameterType="String">
+		INSERT INTO ${tableName} VALUES ${sql}
+	</insert>
 
 </mapper>

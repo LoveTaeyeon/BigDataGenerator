@@ -11,6 +11,6 @@ public interface GenerlMapper {
 	//判断数据库是否存在该表，如果存在则删除
 	public abstract void isExists(@Param("tableName") String tableName);
 	//插入数据,一般为多行
-	public abstract void insert(@Param("sql") String sql);
+	public abstract void insert(@Param("sql") String sql,@Param("tableName") String tableName);
 	
 }

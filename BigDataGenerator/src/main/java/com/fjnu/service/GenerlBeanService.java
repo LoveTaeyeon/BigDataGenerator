@@ -16,8 +16,8 @@ public class GenerlBeanService {
 		generlMapper.createTable(tableName,sql);
 	}
 	
-	public void insertTable(String sql){
-		generlMapper.insert("");
+	public void insertTable(String sql,String tableName){
+		generlMapper.insert(sql,tableName);
 	}
 	
 	
