@@ -1,5 +1,6 @@
 package com.fjnu.utils;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({"rawtypes"})
 public class SqlBulider {
 	
 	private List<String> fieldsNameList = new ArrayList<String>();			//存储表结构各个属性的排序
@@ -21,7 +22,9 @@ public class SqlBulider {
 	 * @return 拼接好的生成表的String
 	 */
 	public String bulidCreateTableSql(HashMap<String,Class> fieldsMap){
-		
+		if(fieldsNameList.size() != 0){
+			fieldsNameList.clear();
+		}
 		StringBuilder sql = new StringBuilder();
 		Set keySet = fieldsMap.keySet();
 		for(Iterator i = keySet.iterator();i.hasNext();){
@@ -52,31 +55,42 @@ public class SqlBulider {
 	/**
 	 * 
 	 * @return
+	 * @throws SecurityException 
+	 * @throws Exception 
 	 */
-	public String buildInsertSql(int dataNumber,List<Class> fieldsList){
+	public String buildInsertSql(Object data) throws Exception{
 		StringBuilder sql = new StringBuilder();
-		for(int i = 0;i < dataNumber;i ++){
-			sql.append("(");
-			for(Class className : fieldsList){
-				switch(className.getSimpleName()){
-					case "String" :
-						
-						break;
-					case "Integer" :
-						break;
-					case "Boolean" :
-						break;
-					case "Double" :
-						break;
-					case "Date" :
-						break;
-				}
-			}
-			sql.append(")");
-			if(i != dataNumber){
+		sql.append("(");
+		Class dataClass = data.getClass();
+		for(int i = 0;i < this.fieldsNameList.size();i ++){
+			String fieldName = this.fieldsNameList.get(i);
+			Field field = dataClass.getDeclaredField("$cglib_prop_" + fieldName);
+			field.setAccessible(true);
+			sql.append("'" + field.get(data) + "'");
+			if(i != this.fieldsNameList.size() - 1){
 				sql.append(",");
 			}
 		}
+		sql.append(")");
+		System.out.println("insertSql:" + sql.toString());
+		return sql.toString();
+	}
+	
+	/**
+	 * 
+	 * @return 属性的顺序拼接成的Sql
+	 */
+	public String getFieldOrderSql(){
+		StringBuilder sql = new StringBuilder();
+		sql.append("(");
+		for(int i = 0;i < this.fieldsNameList.size();i ++){
+			String fieldName = this.fieldsNameList.get(i);
+			sql.append(fieldName);
+			if(i != (this.fieldsNameList.size() - 1)){
+				sql.append(",");
+			}
+		}
+		sql.append(")");
 		return sql.toString();
 	}
 	

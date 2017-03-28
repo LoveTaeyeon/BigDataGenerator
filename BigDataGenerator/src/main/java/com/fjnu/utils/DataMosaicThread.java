@@ -11,6 +11,7 @@ import com.fjnu.service.DoubleGenerator;
 import com.fjnu.service.EunmGenerator;
 import com.fjnu.service.GeneratorInteger;
 import com.fjnu.service.GenerlBeanGenerator;
+import com.fjnu.service.GenerlBeanService;
 import com.fjnu.service.StringGenerator;
 
 /**
@@ -19,16 +20,26 @@ import com.fjnu.service.StringGenerator;
 @SuppressWarnings({"rawtypes","unchecked"})
 public class DataMosaicThread implements Runnable {
 
+	private GenerlBeanService generlBeanService;
+	//sql生成器
+	private SqlBulider sqlBulider;
 	//数据生成器，generator在reset之前使用同一固定规则，可以避免new太多的类
 	private HashMap<String,Object> dataGenerator = new HashMap<String,Object>();
 	//生成Bean的封装类
 	private GenerlBeanGenerator beanGenerator;
 	//需要数据的条数
 	private int dataNumber;
+	//要插入的表的表名
+	private String tableName;
+	//拼接的sql的结果
+	private StringBuilder resultSql = new StringBuilder();
 	
-	public DataMosaicThread(List<Object> dataRules,int dataNumber,HashMap<String,Class> fieldsMap) throws Exception{
+	public DataMosaicThread(List<Object> dataRules,int dataNumber,HashMap<String,Class> fieldsMap,SqlBulider sqlBulider,String tableName,GenerlBeanService generlBeanService) throws Exception{
 		this.dataNumber = dataNumber;
 		this.beanGenerator = new GenerlBeanGenerator(fieldsMap);
+		this.sqlBulider = sqlBulider;
+		this.tableName = tableName;
+		this.generlBeanService = generlBeanService;
 		//先对为该类生成不同种类的数据生成器
 		for(Object obj : dataRules){
 			Class ext = obj.getClass();
@@ -105,9 +116,21 @@ public class DataMosaicThread implements Runnable {
 	@Override
 	public void run() {
 		try {
-			for(int i = 0;i < dataNumber;i ++){
-				generatorData();
+			synchronized (resultSql) {
+				for(int i = 0;i < dataNumber;i ++){
+					this.resultSql.append(sqlBulider.buildInsertSql(generatorData()));
+					if((i >= 10000) && (i == (dataNumber - 1) || (i % 10000 == 0))){
+						System.out.println(resultSql);
+						generlBeanService.insertTable(this.resultSql.toString(),this.tableName,sqlBulider.getFieldOrderSql());
+						this.resultSql.delete(0,this.resultSql.length());
+						continue;
+					}
+					if(i != (dataNumber - 1)){
+						this.resultSql.append(",");
+					}
+				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

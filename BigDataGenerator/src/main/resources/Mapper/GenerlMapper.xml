@@ -17,7 +17,7 @@
 	</insert>
 	
 	<insert id="insert" parameterType="String">
-		INSERT INTO ${tableName} VALUES ${sql}
+		INSERT INTO ${tableName} ${fieldOrder} VALUES ${sql}
 	</insert>
 
 </mapper>

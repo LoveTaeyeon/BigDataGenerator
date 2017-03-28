@@ -7,7 +7,7 @@ import com.fjnu.mapper.GenerlMapper;
 
 @Service
 public class GenerlBeanService {
-
+	
 	@Autowired
 	private GenerlMapper generlMapper;
 	
@@ -16,8 +16,8 @@ public class GenerlBeanService {
 		generlMapper.createTable(tableName,sql);
 	}
 	
-	public void insertTable(String sql,String tableName){
-		generlMapper.insert(sql,tableName);
+	public void insertTable(String sql,String tableName,String fieldOrder){
+		generlMapper.insert(sql,tableName,fieldOrder);
 	}
 	
 	
