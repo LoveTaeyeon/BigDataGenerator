@@ -84,9 +84,6 @@
 	</bean>
 	Spring MVC数据验证配置结束 -->
 	
-	<!-- 统一异常处理器 ,class是自己写的实现HandlerExceptionResolver的类
-	<bean class="com.hand.exception.CustomerExceptionResolver"></bean> -->
-	
 	<!-- 静态资源解析,为了支持RESTful风格，对webapps下的静态资源进行访问 -->
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:resources location="/css/" mapping="/css/**"/>

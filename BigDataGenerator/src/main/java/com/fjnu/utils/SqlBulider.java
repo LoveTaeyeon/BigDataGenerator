@@ -16,7 +16,7 @@ public class SqlBulider {
 	
 	private List<String> fieldsNameList = new ArrayList<String>();			//存储表结构各个属性的排序
 	
-	private String fieldOrderSql;			//表结构String
+	private String fieldOrderSql = "";			//表结构String
 
 	/**
 	 * 
@@ -26,6 +26,9 @@ public class SqlBulider {
 	public String bulidCreateTableSql(HashMap<String,Class> fieldsMap){
 		if(fieldsNameList.size() != 0){
 			fieldsNameList.clear();
+		}
+		if(fieldOrderSql.length() != 0){
+			fieldOrderSql = "";
 		}
 		StringBuilder sql = new StringBuilder();
 		Set keySet = fieldsMap.keySet();

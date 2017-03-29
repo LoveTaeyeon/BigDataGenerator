@@ -89,19 +89,19 @@
                                     </p>
                                 </p>
                                 <!-- 邀请码表单 -->
-                                <form action="#" method="get" class="subscribe-form">
+                                <div class="subscribe-form">
                                     <div class="row">
                                         <fieldset class="col-md-offset-2 col-md-6">
-                                            <textarea style="height: 150px;" name="subscribe-email" id="advice" placeholder="Write your advice here.."></textarea>
+                                            <textarea style="height: 150px;" name="advice" id="advice" placeholder="Write your advice here.."></textarea>
                                         </fieldset>
                                         <fieldset class="col-md-4 button-holder">
-                                            <input style="margin-top: 55px;margin-left: 20px" name="submit" type="submit" class="button default" id="submitAdvice" value="Submit">
+                                            <button style="margin-top: 55px;margin-left: 20px" class="btn-lg btn-success" id="submitAdvice">提交</button>
                                         </fieldset>
                                     </div>
                                     <p class="subscribe-text">
                                         留下您宝贵的意见，谢谢！
                                     </p>
-                                </form>
+                                </div>
                             </div>
                         </div>
                         <!-- 数据生成 -->
@@ -387,6 +387,23 @@
         });
         //String增加和删除按钮的监听结束
 
+        var finishTemp = 0;         //全局变量，标记是否完成了生成数据任务
+
+        function getDataNumber(){
+            var tableName = $("#tableName").val();
+            var dataNumber = $("#dataNumber").val();
+            $.post("generlBean/dataNumber",{"tableName":tableName},function(data){
+                if(finishTemp == 0 && data.value == dataNumber){
+                    $("#tableName").removeAttr("disabled");
+                    $("#dataNumber").removeAttr("disabled");
+                    $("#generatorData").text("生成完成(生成数据)");
+                    $("#generatorData").removeAttr("disabled");
+                    finishTemp = 1;
+                    alert("数据生成完成！可以刷新页面重新生成其他的数据库！");
+                }
+            });
+        }
+
         //生成数据按钮监听
         $("#generatorData").click(function(){
             var enumList = [];
@@ -427,10 +444,10 @@
             }
             var tableName = $("#tableName").val();
             var dataNumber = $("#dataNumber").val();
-            console.log(JSON.stringify(enumList));
-            console.log(JSON.stringify(integerList));
-            console.log(JSON.stringify(doubleList));
-            console.log(JSON.stringify(stringList));
+            // console.log(JSON.stringify(enumList));
+            // console.log(JSON.stringify(integerList));
+            // console.log(JSON.stringify(doubleList));
+            // console.log(JSON.stringify(stringList));
             //向后台传值
             $.post("generlBean/create",{"tableName":tableName,
                                   "dataNumber":dataNumber,
@@ -439,18 +456,30 @@
                                   "doubleList":JSON.stringify(doubleList),
                                   "stringList":JSON.stringify(stringList),
                               },function(data){
-                
+                finishTemp = 0;         //每次鼠标的点击都应该复位查询标志位
+                console.log(data);
+                if(data.value = "success"){
+                    $("#tableName").attr("disabled",true);
+                    $("#dataNumber").attr("disabled",true);
+                    $("#generatorData").text("生成中...");
+                    $("#generatorData").attr("disabled",true);
+                    setInterval("getDataNumber()","10000");
+                }else{
+                    alert("生成失败！请检查您的输入");
+                }
             }); 
         });
 
         //提交意见
         $("#submitAdvice").click(function(){
-
             var advice = $("#advice").val();
-            $.post("/advice/saveAdvice/" + advice,{},function(){
-
+            $.post("advice/saveAdvice",{"advice":advice},function(data){
+                if(data.value = "success"){
+                    alert("意见提交成功！");
+                }else{
+                    alert("意见提交失败！");
+                }
             });
-
         });
 
 

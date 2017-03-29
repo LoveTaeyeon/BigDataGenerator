@@ -19,5 +19,9 @@
 	<insert id="insert" parameterType="String">
 		INSERT INTO ${tableName} ${fieldOrder} VALUES ${sql}
 	</insert>
+	
+	<select id="getDataNumber" resultType="java.lang.Integer" parameterType="String">
+		SELECT COUNT(*) FROM ${tableName}
+	</select>
 
 </mapper>

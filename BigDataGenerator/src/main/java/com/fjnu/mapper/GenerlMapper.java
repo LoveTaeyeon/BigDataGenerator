@@ -12,5 +12,6 @@ public interface GenerlMapper {
 	public abstract void isExists(@Param("tableName") String tableName);
 	//插入数据,一般为多行
 	public abstract void insert(@Param("sql") String sql,@Param("tableName") String tableName,@Param("fieldOrder") String fieldOrder);
-	
+	//计算生成的数量
+	public abstract Integer getDataNumber(@Param("tableName") String tableName);
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fjnu.entity.DoubleExt;
 import com.fjnu.entity.EnumExt;
@@ -17,6 +18,7 @@ import com.fjnu.entity.StringExt;
 import com.fjnu.service.GenerlBeanGenerator;
 import com.fjnu.service.GenerlBeanService;
 import com.fjnu.utils.DataMosaicThread;
+import com.fjnu.utils.KeyValueObject;
 import com.fjnu.utils.SqlBulider;
 
 import net.sf.json.JSONArray;
@@ -31,8 +33,8 @@ public class GenerlBeanController {
 	private SqlBulider sqlBulider;
 	
 	@SuppressWarnings({"static-access","rawtypes"})
-	@RequestMapping("create")
-	public void crateTable(HttpServletRequest request){
+	@RequestMapping("/create")
+	public @ResponseBody KeyValueObject crateTable(HttpServletRequest request){
 		String tableName = request.getParameter("tableName");
 		String dataNumber = request.getParameter("dataNumber");
 		JSONArray enumList = JSONArray.fromObject(request.getParameter("enumList"));
@@ -84,11 +86,19 @@ public class GenerlBeanController {
 			t2.start();
 			t3.start();
 			t4.start();
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			return new KeyValueObject("info","success");
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new KeyValueObject("info","faild");
 		}
+	}
+	
+	@RequestMapping("/dataNumber")
+	public @ResponseBody KeyValueObject getDataNumber(HttpServletRequest request){
+		String tableName = request.getParameter("tableName");
+		int result = generlBeanService.getDataNumber(tableName);
+		System.out.println(result);
+		return new KeyValueObject(tableName,result);
 	}
 	
 }

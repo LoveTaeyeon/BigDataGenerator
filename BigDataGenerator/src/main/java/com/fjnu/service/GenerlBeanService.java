@@ -20,5 +20,8 @@ public class GenerlBeanService {
 		generlMapper.insert(sql,tableName,fieldOrder);
 	}
 	
+	public int getDataNumber(String tableName){
+		return generlMapper.getDataNumber(tableName);
+	}
 	
 }
