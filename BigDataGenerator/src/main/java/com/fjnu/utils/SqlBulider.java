@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 public class SqlBulider {
 	
 	private List<String> fieldsNameList = new ArrayList<String>();			//存储表结构各个属性的排序
+	
+	private String fieldOrderSql;			//表结构String
 
 	/**
 	 * 
@@ -72,7 +74,6 @@ public class SqlBulider {
 			}
 		}
 		sql.append(")");
-		System.out.println("insertSql:" + sql.toString());
 		return sql.toString();
 	}
 	
@@ -81,6 +82,10 @@ public class SqlBulider {
 	 * @return 属性的顺序拼接成的Sql
 	 */
 	public String getFieldOrderSql(){
+		//进行性能优化，不需要每一次都要拼接，如果有的话，直接使用
+		if(this.fieldOrderSql.length() != 0){
+			return this.fieldOrderSql;
+		}
 		StringBuilder sql = new StringBuilder();
 		sql.append("(");
 		for(int i = 0;i < this.fieldsNameList.size();i ++){
@@ -91,6 +96,7 @@ public class SqlBulider {
 			}
 		}
 		sql.append(")");
+		this.fieldOrderSql = sql.toString();
 		return sql.toString();
 	}
 	

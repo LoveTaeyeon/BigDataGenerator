@@ -116,21 +116,19 @@ public class DataMosaicThread implements Runnable {
 	@Override
 	public void run() {
 		try {
-			synchronized (resultSql) {
-				for(int i = 0;i < dataNumber;i ++){
-					this.resultSql.append(sqlBulider.buildInsertSql(generatorData()));
-					if((i >= 10000) && (i == (dataNumber - 1) || (i % 10000 == 0))){
-						System.out.println(resultSql);
-						generlBeanService.insertTable(this.resultSql.toString(),this.tableName,sqlBulider.getFieldOrderSql());
-						this.resultSql.delete(0,this.resultSql.length());
-						continue;
-					}
-					if(i != (dataNumber - 1)){
-						this.resultSql.append(",");
-					}
+			for(int i = 0;i < dataNumber;i ++){
+				this.resultSql.append(sqlBulider.buildInsertSql(generatorData()));
+				//10000条数据为一次插入时比较好，往上需要太多的内存调度，往下与数据库的交互次数太多影响性能
+				if((i >= 10000) && (i == (dataNumber - 1) || (i % 10000 == 0))){
+					System.out.println(resultSql);
+					generlBeanService.insertTable(this.resultSql.toString(),this.tableName,sqlBulider.getFieldOrderSql());
+					this.resultSql.delete(0,this.resultSql.length());
+					continue;
+				}
+				if(i != (dataNumber - 1)){
+					this.resultSql.append(",");
 				}
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
