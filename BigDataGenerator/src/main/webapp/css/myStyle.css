@@ -310,6 +310,11 @@ h1, h2, h3, h4, h5 {
   font-size: 14px;
 }
 
+.faq {
+  color: #424242;
+  font-weight: 600;
+}
+
 /* 修改输入框提示颜色 */
 input::-webkit-input-placeholder{
   color: #fff;

@@ -37,6 +37,7 @@ public class GenerlBeanController {
 	public @ResponseBody KeyValueObject crateTable(HttpServletRequest request){
 		String tableName = request.getParameter("tableName");
 		String dataNumber = request.getParameter("dataNumber");
+		String processNumber = request.getParameter("processNumber");
 		JSONArray enumList = JSONArray.fromObject(request.getParameter("enumList"));
 		JSONArray integerList = JSONArray.fromObject(request.getParameter("integerList"));
 		JSONArray doubleList = JSONArray.fromObject(request.getParameter("doubleList"));
@@ -73,19 +74,11 @@ public class GenerlBeanController {
 		generlBeanService.createTable(tableName,sql);
 		//建表结束,开始生成insert语句
 		try {
-			//因为我的电脑的CPU是双核心的，线程的最优配置是四个线程，所以这边开四个线程
-			DataMosaicThread thread1 = new DataMosaicThread(dataRules,Integer.parseInt(dataNumber)/4,fieldsMap,sqlBulider,tableName,generlBeanService);
-			DataMosaicThread thread2 = new DataMosaicThread(dataRules,Integer.parseInt(dataNumber)/4,fieldsMap,sqlBulider,tableName,generlBeanService);
-			DataMosaicThread thread3 = new DataMosaicThread(dataRules,Integer.parseInt(dataNumber)/4,fieldsMap,sqlBulider,tableName,generlBeanService);
-			DataMosaicThread thread4 = new DataMosaicThread(dataRules,Integer.parseInt(dataNumber)/4,fieldsMap,sqlBulider,tableName,generlBeanService);
-			Thread t1 = new Thread(thread1);
-			Thread t2 = new Thread(thread2);
-			Thread t3 = new Thread(thread3);
-			Thread t4 = new Thread(thread4);
-			t1.start();
-			t2.start();
-			t3.start();
-			t4.start();
+			for(int i = 0;i < Integer.parseInt(processNumber);i ++){
+				DataMosaicThread thread1 = new DataMosaicThread(dataRules,Integer.parseInt(dataNumber)/Integer.parseInt(processNumber),fieldsMap,sqlBulider,tableName,generlBeanService);
+				Thread t = new Thread(thread1);
+				t.start();
+			}
 			return new KeyValueObject("info","success");
 		} catch (Exception e) {
 			e.printStackTrace();
