@@ -34,7 +34,7 @@ public class GeneratorInteger {
 		Random random = new Random();
 		double u1 = random.nextDouble();
 		double u2 = random.nextDouble();
-		double result = this.average + Math.pow(this.deviation,2)*Math.sqrt(-2.0*(Math.log(u1)/Math.log(Math.E))) * Math.cos(2*Math.PI*u2);
+		double result = this.average + this.deviation * Math.sqrt(-2.0*(Math.log(u1)/Math.log(Math.E))) * Math.cos(2*Math.PI*u2);
 		//如果生成的结果不满足用户输入的值域，则重新生成
 		if(result < this.mix || result > this.max){
 			return generatorInteger();

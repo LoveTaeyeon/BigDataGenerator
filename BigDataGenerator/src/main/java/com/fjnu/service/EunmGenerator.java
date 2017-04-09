@@ -17,6 +17,7 @@ public class EunmGenerator {
 	private List<KeyValueObject> keyValueList;
 	private String value;
 	private String probability;
+	private HashMap<String, Double> eunmMapData;
 	
 	public EunmGenerator(){}
 	
@@ -29,6 +30,7 @@ public class EunmGenerator {
 		this.value = value;
 		this.probability = probability;
 		this.keyValueList = new ArrayList<KeyValueObject>();
+		this.eunmMapData = new HashMap<String, Double>();
 	}
 
 	public static void main(String[] args) {
@@ -133,6 +135,9 @@ public class EunmGenerator {
 	 */
 	public HashMap<String, Double> translateToMap(String value, String probability) throws Exception {
 
+		if(!this.eunmMapData.isEmpty()){
+			return this.eunmMapData;
+		}
 		// 判断输入的合法性，不合法的话向上级返回报错信息
 		try {
 			judgeLegitimacy(value, probability);
@@ -141,12 +146,11 @@ public class EunmGenerator {
 		}
 		String[] values = value.split(",");
 		String[] probabilitieString = probability.split(",");
-		HashMap<String, Double> eunmMap = new HashMap<String, Double>();
 		// 构造hashMap
 		for (int i = 0; i < probabilitieString.length; i++) {
-			eunmMap.put(values[i], Double.valueOf(probabilitieString[i]));
+			this.eunmMapData.put(values[i], Double.valueOf(probabilitieString[i]));
 		}
-		return eunmMap;
+		return this.eunmMapData;
 	}
 
 	/**
